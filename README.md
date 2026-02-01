@@ -31,7 +31,3 @@ This tool is designed for bulk image extraction workflows where image links are 
   - openpyxl
   - zipfile
 - **Communication:** REST API + Server-Sent Events (SSE)
-
----
-
-## 📁 Project Structure

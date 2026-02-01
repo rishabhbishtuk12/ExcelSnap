@@ -29,7 +29,7 @@ def delete_file_after_delay(path, delay=600):  # 600 sec = 10 min
         time.sleep(delay)
         if os.path.exists(path):
             os.remove(path)
-            print(f"🗑 Deleted upload file: {path}")
+           
     threading.Thread(target=delete, daemon=True).start()
 
 @app.route("/")
@@ -109,43 +109,6 @@ def process_file():
         download_name="images.zip"
     )
 
-
-
-
-
-# @app.route("/process", methods=["POST"])
-# def process_file():
-#     print("🔥 /process API CALLED")
-#     data = request.json
-#     print("📦 DATA RECEIVED:", data)
-#     excel = pd.ExcelFile(data["file_path"])
-
-#     for sheet in data["sheets"]:
-#         print("📄 Processing sheet:", sheet)
-#         df = pd.read_excel(excel, sheet_name=sheet)
-#         print("🧮 Rows found:", len(df))
-#         for _, row in df.iterrows():
-#             url = row.get(data["url_column"])
-#             name = row.get(data["name_column"])
-#             print("➡️ URL:", url)
-#             print("➡️ NAME:", name)
-#             if pd.isna(url) or pd.isna(name):
-#                 continue
-
-#             try:
-#                 r = requests.get(url, timeout=10)
-#                 ext = url.split(".")[-1].split("?")[0]
-#                 filename = f"{clean_filename(name)}.{ext}"
-
-#                 with open(os.path.join(DOWNLOAD_FOLDER, filename), "wb") as f:
-#                     f.write(r.content)
-#             except Exception as e:
-#                 print("❌ IMAGE DOWNLOAD FAILED:", url)
-#                 print("   ERROR:", e)
-                
-
-#     excel.close()
-#     return jsonify({"message": "Done"})
 
 if __name__ == "__main__":
     import os

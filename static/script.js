@@ -1,10 +1,3 @@
-console.log("✅ Final JS loaded");
-
-// TODO: Commented this
-// window.addEventListener("beforeunload", function () {
-//   alert("⚠️ PAGE IS RELOADING");
-// });
-
 // ELEMENTS
 const fileInput = document.getElementById("excelFile");
 const fileName = document.getElementById("fileName");
@@ -28,8 +21,6 @@ fileInput.addEventListener("change", () => {
 
 // UPLOAD BUTTON CLICK (NO FORM, NO RELOAD)
 uploadBtn.addEventListener("click", () => {
-  console.log("📤 Upload button clicked");
-
   if (!fileInput.files.length) {
     statusText.textContent = "❌ Please select an Excel file";
     statusText.style.color = "red";
@@ -42,7 +33,7 @@ uploadBtn.addEventListener("click", () => {
   statusText.textContent = "⏳ Uploading file...";
   statusText.style.color = "blue";
 
-  fetch("http://127.0.0.1:5000/upload", {
+  fetch("https://excelsnap.onrender.com/upload", {
     method: "POST",
     body: formData,
   })
@@ -51,8 +42,6 @@ uploadBtn.addEventListener("click", () => {
       return res.json();
     })
     .then((data) => {
-      console.log("✅ Upload success:", data);
-
       uploadedFilePath = data.file_path;
       renderConfigUI(data.sheets, data.columns);
 
@@ -60,7 +49,6 @@ uploadBtn.addEventListener("click", () => {
       statusText.style.color = "green";
     })
     .catch((err) => {
-      console.error(err);
       statusText.textContent = "❌ Upload failed";
       statusText.style.color = "red";
     });
@@ -97,8 +85,6 @@ function renderConfigUI(sheets, columns) {
 
 // START DOWNLOAD
 startBtn.addEventListener("click", () => {
-  console.log("🚀 Start download clicked");
-
   // TODO: CHANGED THIS AS IT WAS SELECTING CHECKBOXES
   const selectedSheets = Array.from(
     sheetsContainer.querySelectorAll("input[type='checkbox']:checked"),
@@ -114,7 +100,7 @@ startBtn.addEventListener("click", () => {
   statusText.textContent = "⏳ Downloading images...";
   statusText.style.color = "blue";
 
-  fetch("http://127.0.0.1:5000/process", {
+  fetch("https://excelsnap.onrender.com/process", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -134,25 +120,7 @@ startBtn.addEventListener("click", () => {
       statusText.style.color = "green";
     })
     .catch((err) => {
-      console.error(err);
       statusText.textContent = "❌ Download failed";
       statusText.style.color = "red";
     });
 });
-
-// fetch("http://127.0.0.1:5000/process", {
-//   method: "POST",
-//   headers: { "Content-Type": "application/json" },
-//   body: JSON.stringify(payload),
-// })
-//   .then((res) => res.json())
-//   .then((data) => {
-//     console.log("✅ Download done:", data);
-//     statusText.textContent = "✅ Download completed successfully";
-//     statusText.style.color = "green";
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//     statusText.textContent = "❌ Download failed";
-//     statusText.style.color = "red";
-//   });
