@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Excel Image Downloader</title>
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- UPLOAD SECTION (NO FORM) -->
+      <div id="uploadSection">
+        <h1>📊 Upload Excel File</h1>
+
+        <label class="upload-box">
+          <input type="file" id="excelFile" name="file" accept=".xlsx,.xls" />
+          <span id="fileName">Click to upload Excel file</span>
+        </label>
+
+        <!-- IMPORTANT: button, NOT submit -->
+        <button type="button" id="uploadBtn">Upload</button>
+      </div>
+
+      <p id="status"></p>
+      <!-- CONFIG SECTION -->
+      <div id="configSection" style="display: block">
+        <div id="sheetsSection">
+          <h3>Sheets:</h3>
+          <div id="sheetsContainer"></div>
+        </div>
+        <!-- <div id="sheets"></div> -->
+
+        <div id="columnSelectors">
+          <h4>Columns:</h4>
+
+          <div class="colums">
+            <label>Name:</label>
+            <select id="nameColumn">
+              <option selected>Name</option>
+            </select>
+          </div>
+          <div class="colums">
+            <label>Link:</label>
+            <select id="urlColumn">
+              <option selected>Link</option>
+            </select>
+          </div>
+        </div>
+
+        <br />
+        <button type="button" id="startBtn">Start Download</button>
+      </div>
+    </div>
+
+    <script src="../static/script.js"></script>
+  </body>
+</html>
